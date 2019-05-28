@@ -1,0 +1,55 @@
+version: '2'
+
+services: 
+#  zeppelin:
+#    image: apache/zeppelin:0.8.0
+#    container_name: zeppelin-0.8.0
+#    environment:
+#      - ZEPPELIN_NOTEBOOK_DIR=/notebook
+#      - ZEPPELIN_LOG_DIR=/logs
+#    ports:
+#      - 8080:8080
+#      - 8443:8443
+#    volumes:
+#      - ~/sandbox/etl-test:/var/etl-test/
+#      - ~/zeppelin/logs:/logs
+#      - ~/zeppelin/notebook:/notebook
+#
+#    mem_limit: 2g
+
+  # mysql:
+  #   image: mysql:5.5.46
+  #   container_name: mysql-5.5.46
+  #   volumes:
+  #     - ~/sandbox/mysql-docker-db:/var/lib/mysql
+  #   restart: always
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: 1234
+  #     MYSQL_DATABASE: etl
+  #     MYSQL_USER: etluser
+  #     MYSQL_PASSWORD: 1234 
+  #   ports:
+  #     - 3306:3306
+    
+  #   mem_limit: 500m
+
+  airflow:
+    image: puckel/docker-airflow:1.9.0-4
+    container_name: airflow-1.9.0-4
+    restart: always
+    environment:
+      - LOAD_EX=y
+    ports:
+      - 8081:8080
+
+    mem_limit: 500m
+
+  cdap:
+    image: caskdata/cdap-sandbox:5.1.0
+    container_name: cdap-sandbox-5.1.0
+    restart: always
+    ports:
+      - 11011:11011
+      - 11015:11015
+
+    mem_limit: 2g

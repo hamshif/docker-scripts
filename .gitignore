@@ -1,0 +1,14 @@
+/target/
+.project
+.classpath
+/.settings/
+/conf/
+
+/.idea/
+*.iml
+
+/airflow-docker/dags/
+/airflow-docker/data/
+
+gcp-service-account-credentials.json
+google-source-credentials.sh
