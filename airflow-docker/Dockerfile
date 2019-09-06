@@ -26,6 +26,8 @@ RUN wget https://releases.hashicorp.com/terraform/${TER_VER}/terraform_${TER_VER
     && rm ./terraform_${TER_VER}_linux_amd64.zip \
     && terraform --version
 
+#RUN pip install --upgrade pip
+
 RUN pip install jprops python_terraform
 
 RUN usermod -aG sudo airflow \
@@ -51,12 +53,12 @@ RUN pip install -r requirements.txt
 
 # Git permissions for gcp
 # Every User must get this script for his own environment!!!
-COPY credentials/google-source-credentials.sh .
-COPY credentials/google_source_credentials.py .
-
+#COPY credentials/google-source-credentials.sh .
+#COPY credentials/google_source_credentials.py .
 #
-RUN chmod 777 google_source_credentials.py \
-    && ./google_source_credentials.py
+##
+#RUN chmod 777 google_source_credentials.py \
+#    && ./google_source_credentials.py
 
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
@@ -68,11 +70,11 @@ RUN sudo mkdir -p /opt/service_account
 
 ENV GOOGLE_APPLICATION_CREDENTIALS="/opt/service_account/gcp-service-account-credentials.json"
 
-COPY credentials/gcp-service-account-credentials.json $GOOGLE_APPLICATION_CREDENTIALS
+#COPY credentials/gcp-service-account-credentials.json $GOOGLE_APPLICATION_CREDENTIALS
 
 
-RUN ./google_source_credentials.py \
-    && rm google-source-credentials.sh
+#RUN ./google_source_credentials.py \
+#    && rm google-source-credentials.sh
 
 RUN export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" \
     && echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
@@ -81,7 +83,7 @@ RUN sudo apt-get -y update
 RUN sudo apt-get install -y google-cloud-sdk
 
 
-RUN gcloud -q auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS --project=marketo-datalake-dev
+#RUN gcloud -q auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS --project=marketo-datalake-dev
 
 
 WORKDIR ${AIRFLOW_HOME}
