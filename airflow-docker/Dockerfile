@@ -83,7 +83,7 @@ RUN sudo apt-get -y update
 RUN sudo apt-get install -y google-cloud-sdk
 
 
-#RUN gcloud -q auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS --project=marketo-datalake-dev
+#RUN gcloud -q auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS --project=wielder-datalake-dev
 
 
 WORKDIR ${AIRFLOW_HOME}
