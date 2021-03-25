@@ -93,7 +93,7 @@ python-terraform==0.10.0
 python3-openid==3.1.0
 pytz==2018.9
 pytzdata==2018.7
-PyYAML==3.13
+PyYAML==5.4
 redis==2.10.6
 requests==2.21.0
 requests-oauthlib==1.2.0
